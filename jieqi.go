@@ -42,34 +42,39 @@ func GetZhongQi(date TDate) (TDate, TDate) {
 	var pLastDate TDate
 
 	for i := range pMap1.DateList {
-
+		// 必须中气
+		if pMap1.DateList[i].JieQi%2 != 0 {
 			// 找到最后的那个节气
 			if CompareDate(date, pMap1.DateList[i]) <= 1 {
 				pLastDate = pMap1.DateList[i]
 			} else {
 				return pLastDate, pMap1.DateList[i]
 			}
-
+		}
 	}
 	for i := range pMap2.DateList {
-
+		// 必须中气
+		if pMap2.DateList[i].JieQi%2 != 0 {
 			// 找到最后的那个节气
 			if CompareDate(date, pMap2.DateList[i]) <= 1 {
 				pLastDate = pMap2.DateList[i]
 			} else {
 				return pLastDate, pMap2.DateList[i]
 			}
-
+		}
 	}
 	for i := range pMap3.DateList {
+		// 必须中气
+		if pMap3.DateList[i].JieQi%2 != 0 {
 			// 找到最后的那个节气
 			if CompareDate(date, pMap3.DateList[i]) <= 1 {
 				pLastDate = pMap3.DateList[i]
 			} else {
 				return pLastDate, pMap3.DateList[i]
 			}
-		
+		}
 	}
+
 
 	// 错误
 	return date, date
