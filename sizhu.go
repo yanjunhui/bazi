@@ -1,10 +1,5 @@
 package bazi
 
-import (
-	"fmt"
-	"time"
-)
-
 // 补充五行
 func CalcWuXing(pZhu *TZhu) TZhu {
 	// 五行
@@ -72,16 +67,8 @@ func GetZhuFromMonth(nMonth int, nGan int) TZhu {
 func GetZhuFromDay(nYear, nMonth, nDay, nHour int) TZhu {
 	var zhu TZhu
 
-	date, err := time.Parse("2006-01-02", fmt.Sprintf("%d-%.2d-%.2d", nYear, nMonth, nDay))
-	if err == nil && nHour == 23 {
-		date = date.AddDate(0, 0, 1)
-		nYear = date.Year()
-		nMonth = int(date.Month())
-		nDay = date.Day()
-	}
-
 	// 通过总天数 计算当前天的一个值
-	zhu.GanZhi.Value = GetGanZhiFromDay(GetAllDays(nYear, nMonth, nDay))
+	zhu.GanZhi.Value = GetGanZhiFromDay(GetAllDays(nYear, nMonth, nDay), nHour)
 
 	// 获得八字日的干0-9 对应 甲到癸
 	// 获得八字日的支0-11 对应 子到亥
@@ -93,7 +80,9 @@ func GetZhuFromDay(nYear, nMonth, nDay, nHour int) TZhu {
 // 从公历小时,  获得日柱天干获取时柱
 func GetZhuFromHour(nHour int, nGan int) TZhu {
 	var zhu TZhu
-
+	if nHour >= 23{
+		nGan--
+	}
 	zhu.Gan.Value, zhu.Zhi.Value = GetGanZhiFromHour(nHour, nGan)
 	CombineGanZhi2(&zhu.GanZhi, &zhu.Gan, &zhu.Zhi)
 

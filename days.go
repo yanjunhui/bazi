@@ -66,8 +66,12 @@ func GetGanZhiFromHour(nHour, nGan int) (int, int) {
 }
 
 // 获得某公历日的天干地支，0-59 对应 甲子到癸亥
-func GetGanZhiFromDay(nAllDays int) int {
-	return (nAllDays + 12) % 60
+func GetGanZhiFromDay(nAllDays, nHour int) int {
+	n := (nAllDays + 12) % 60
+	if nHour >= 23{
+		n++
+	}
+	return n
 }
 
 // 获得距公元原点的日数 这里是公历的年月日
