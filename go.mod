@@ -1,3 +1,3 @@
-module github.com/yanjunhui/mongodb
+module github.com/yanjunhui/bazi
 
 go 1.14
