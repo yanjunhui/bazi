@@ -1,3 +1,3 @@
-module github.com/yanjunhui/bazi
+module bazi
 
 go 1.14
