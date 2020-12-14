@@ -1,6 +1,7 @@
 package bazi
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -114,8 +115,16 @@ func GetBaziFromLunar(nYear, nMonth, nDay, nHour, nMinute, nSecond, nSex int, is
 
 }
 
-func (self *TBazi) Print() {
-	PrintBazi(self)
+func (bazi *TBazi) String() string {
+	return fmt.Sprintf("%s %s %s %s",
+		bazi.SiZhu.YearZhu.GanZhi.ToString(),
+		bazi.SiZhu.MonthZhu.GanZhi.ToString(),
+		bazi.SiZhu.DayZhu.GanZhi.ToString(),
+		bazi.SiZhu.HourZhu.GanZhi.ToString())
+}
+
+func (bazi *TBazi) Print() {
+	PrintBazi(bazi)
 }
 
 // 按照特殊格式化输出(未完成)
