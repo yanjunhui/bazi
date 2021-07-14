@@ -80,9 +80,6 @@ func GetZhuFromDay(nYear, nMonth, nDay, nHour int) TZhu {
 // 从公历小时,  获得日柱天干获取时柱
 func GetZhuFromHour(nHour int, nGan int) TZhu {
 	var zhu TZhu
-	if nHour >= 23{
-		nGan--
-	}
 	zhu.Gan.Value, zhu.Zhi.Value = GetGanZhiFromHour(nHour, nGan)
 	CombineGanZhi2(&zhu.GanZhi, &zhu.Gan, &zhu.Zhi)
 
