@@ -3,6 +3,7 @@ package bazi
 import (
 	"fmt"
 	"log"
+	"time"
 )
 
 // 八字
@@ -39,6 +40,15 @@ func calc(bazi *TBazi, nSex int) {
 
 	//获取时柱
 	bazi.SiZhu.HourZhu = GetZhuFromHour(bazi.SolarDate.Hour, bazi.SiZhu.DayZhu.Gan.Value)
+
+	//23点后换日
+	if bazi.SolarDate.Hour == 23{
+		t, err := time.Parse("2006-01-02", fmt.Sprintf("%d-%.2d-%.2d", bazi.SolarDate.Year, bazi.SolarDate.Month, bazi.SolarDate.Day))
+		if err == nil{
+			t = t.AddDate(0,0,1)
+			bazi.SiZhu.DayZhu = GetZhuFromDay(bazi.SolarDate.Year, bazi.SolarDate.Month, t.Day(), 0)
+		}
+	}
 
 	// 计算十神
 	CalcShiShen(&bazi.SiZhu)
